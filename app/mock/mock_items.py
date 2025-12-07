@@ -1,12 +1,13 @@
 from model.item import Item
 from datetime import datetime
+from util.Util import Util
 
 def get_mock_items() -> list[dict]:
     items = []
     for i in range(10):
         item = Item(
             id = i,
-            datetime_string = datetime.now(),
+            datetime_string = Util.get_datetime_string(datetime.now()),
             user_id = i,
             n_good = i,
             n_bad = i,

@@ -1,7 +1,9 @@
 from datetime import datetime
 
 class Util:
-    def get_datetime_string(self, datetime: datetime):
+
+    @staticmethod
+    def get_datetime_string(datetime: datetime):
         year = "{}".format(datetime.year)
         month = "{}".format(datetime.month).zfill(2)
         day = "{}".format(datetime.day).zfill(2)
