@@ -5,6 +5,7 @@ from typing import Optional, Union
 @dataclasses.dataclass
 class Item:
     id: int
+    datetime_string: str # yyyymmddhhmmss
     user_id: int
     n_good: int 
     n_bad: int
