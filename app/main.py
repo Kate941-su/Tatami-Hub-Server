@@ -49,13 +49,32 @@ with app.app_context():
 def test():
     return make_response(jsonify({'message': 'test route'}), 200)
 
-@app.route('/api/items', methods=['GET'])
+@app.route('/api/mock/items', methods=['GET'])
 def get_mock_all():
     # Example database query (requires initial table creation/migration)
     # items = Item.query.all()
     # return jsonify([{'id': item.id, 'name': item.name} for item in items])
     result = get_mock_items()
     return make_response(jsonify(result), 200)
+
+@app.route('/api/items', methods=['GET'])
+def get_all():
+    items = db.session.execute(db.select(Item)).scalars().all() 
+    response_items = [ItemModel(
+            id = item.id,
+            datetime_string = item.datetime_string),
+            user_id = item.user_id,
+            n_good = 0,
+            n_bad = 0,
+            title = item.title,
+            tags = item.tags,
+            link_url =  item.link_url,
+            thumbnail_url =  item.thumbnail_url,
+            description =  'Description.',
+            embedded_url  =  None,
+        ) for item in items]
+    return make_response(jsonify(response_items), 200)
+
 
 @app.route('/api/items/<int:page>', methods=['GET'])
 def get_item_by_page(page):
