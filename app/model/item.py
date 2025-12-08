@@ -4,7 +4,7 @@ from typing import Optional, Union
 from datetime import datetime
 
 @dataclasses.dataclass
-class Item:
+class ItemModel:
     id: int
     datetime_string: str # yyyymmddhhmmss
     user_id: int
@@ -21,8 +21,8 @@ class Item:
         return dataclasses.asdict(self)
     
     @staticmethod
-    def fromJson(json_data: dict[str, any]) -> Optional['Item']:
-        return Item(
+    def fromJson(json_data: dict[str, any]) -> Optional['ItemModel']:
+        return ItemModel(
             # Required fields are passed directly
             id=json_data['id'],
             datetime_string=json_data['datetime_string'],
